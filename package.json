@@ -1,10 +1,10 @@
 {
   "name": "css-load-import",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Read the \"require\" of you javascript files. to make a CSS Importer.",
   "main": "index.js",
   "bin": {
-    "css-load": "bin/cli.js"
+    "cssload": "bin/cli.js"
   },
   "directories": {
     "test": "test"
