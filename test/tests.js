@@ -2,34 +2,48 @@ const fs = require('fs')
 const postcss = require('postcss')
 const atImport = require('postcss-import')
 const path = require('path')
-const {Importers, makeAImportableFile, resolveImporter} = require('..')
+const {Importers, makeAImportableFile, resolveImporter, REGEXPFINDCOMMENTS, descompose, getCommentsFromString} = require('..')
 
-// const myBufferFile = fs.readFileSync(__dirname + '/examples/myComponent.js')
 
-// const importers = Importers(myBufferFile)
+let falseScript1 = `
+/*   Comment 1  */
+/*   Comment 2   */
+/**  Comment 3    */
+/*   Comment 4  */
 
-// const SourceFileImporter = makeAImportableFile(importers, {
-//   cwd: __dirname + '/examples',
-//   baseDir: __dirname + '/examples/myComponent.js'
-// })
+/**
+ *Comment 5
+ */
+`
 
-console.log('------------------------------------')
+
+describe('get comment from strings', () => {
+
+  it('falseScript1', () => {
+
+    const e = getCommentsFromString(falseScript1)
+    console.log([...e])
+
+  })
+
+})
+
 
 describe('Importers', () => {
 
   describe('a', () => {
-    const filePath = path.resolve( __dirname + '/./examples/singleImport.js')
+    // const filePath = path.resolve( __dirname + '/./examples/singleImport.js')
 
-    const e = makeAImportableFile(resolveImporter(Importers(fs.readFileSync(filePath)), {from: path.dirname(filePath)}))
+    // const e = makeAImportableFile(resolveImporter(Importers(fs.readFileSync(filePath)), {from: path.dirname(filePath)}))
 
-    console.log(e.source)
+    // console.log(e.source)
 
-    postcss()
-      .use(atImport())
-      .process(e.source, {from: './test/examples/style.css'})
-      .then(function (out) {
-        console.log(out.css)
-      })
+    // postcss()
+    //   .use(atImport())
+    //   .process(e.source, {from: './test/examples/style.css'})
+    //   .then(function (out) {
+    //     // console.log(out.css)
+    //   })
 
     it('')
 

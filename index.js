@@ -3,8 +3,15 @@ const path = require('path')
 const trim = require('lodash/trim')
 const isNull = require('lodash/isNull')
 const isString = require('lodash/isString')
+
+const REGEXPFINDCOMMENTS = /(\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\/)|(\/\/.*)/g
+
 const REGEXPFINDSTYLESHEET = /^((css|style)(sheet|file|import|require|load)?)\s*(:|=)\s*(["|'](\S+)["|']|(\S+))$/im
 const REGEXPFINDSTYLESINLINE = /^((css|style)(sheet)?)\s+([\s\S]+)$/g
+
+/*
+hola
+*/
 
 function inspectorStylesheetFromChunk (chunkArg) {
   const chunk = trim(chunkArg)
@@ -57,18 +64,19 @@ function makeAImportableFile (importers) {
 
 function * resolveImporter (importer, {from, fromFile:fromFileArg, cwd:cwdArg, baseDir:baseDirArg} = {}) {
   const cwd = cwdArg || process.cwd()
-  const baseDir = baseDirArg || process.cwd()
-  const fromFile = fromFileArg
 
   const arrImporter = [...importer]
 
   yield * arrImporter.filter(e=>e.type==='stylesheet').map(function (imprt) {
     const {type, value} = imprt
 
-    const baseDir = path.resolve(from + "/" + value)
+    const preBaseDir = path.resolve(from + "/" + value)
+
+    const baseDir = path.relative(cwd, preBaseDir)
+
     const css = `@import "${baseDir}";`
 
-    return {type, value, baseDir, fromFile, from, css}
+    return {type, value, baseDir, from, css}
   })
 
   yield * arrImporter.filter(e=>e.type==='styles').map(function (imprt) {
@@ -80,7 +88,24 @@ function * resolveImporter (importer, {from, fromFile:fromFileArg, cwd:cwdArg, b
   })
 }
 
+function * getCommentsFromString (stringArg) {
+  let currentInspect = REGEXPFINDCOMMENTS.exec(stringArg)
+
+  if (currentInspect !== null) {
+    yield currentInspect
+    newChunk = currentInspect.input.slice(currentInspect.index + currentInspect[0].length)
+    yield * getCommentsFromString(newChunk)
+  }
+
+}
+
+function descompose (stringArg) {
+
+}
+
 exports = module.exports
 exports.Importers = Importers
 exports.makeAImportableFile = makeAImportableFile
 exports.resolveImporter = resolveImporter
+exports.REGEXPFINDCOMMENTS = REGEXPFINDCOMMENTS
+exports.getCommentsFromString = getCommentsFromString

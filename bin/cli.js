@@ -11,10 +11,12 @@ const cssImport = require('..')
 
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
-    out: "style.css"
+    out: "style.css",
+    relative: process.cwd()
   },
   alias: {
-    o: 'out'
+    o: 'out',
+    r: 'relative'
   }
 })
 
@@ -29,7 +31,6 @@ switch (args.shift()) {
 
       console.log(`/** CSSLoadImport: from ${files.length} files **/`)
 
-
       files.map(function (filePath) {
         return [
           filePath,
@@ -37,7 +38,8 @@ switch (args.shift()) {
             cssImport.resolveImporter(
               cssImport.Importers(fs.readFileSync(filePath)),
               {
-                from: path.dirname(filePath)
+                from: path.dirname(filePath),
+                cwd: path.resolve(argv.relative)
               }
             )
           )
