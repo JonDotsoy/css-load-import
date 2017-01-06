@@ -1,10 +1,10 @@
 {
   "name": "css-load-import",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "Read the \"require\" of you javascript files. to make a CSS Importer.",
   "main": "index.js",
   "bin": {
-    "cssload": "bin/cli.js"
+    "cssload": "./bin/cli.js"
   },
   "directories": {
     "test": "test"
@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "author": "Jonathan Delgado <hi@jon.soy>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "async": "^2.1.4",
     "glob": "^7.1.1",
@@ -25,9 +25,6 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "mocha": "^3.2.0"
-  },
-  "bin": {
-    "css-load-import": "cli.js"
   },
   "repository": {
     "type": "git",
