@@ -1,6 +1,7 @@
 {
   "name": "cssload",
-  "version": "1.0.0-beta.8",
+  "title": "CSSLoad",
+  "version": "1.0.0-beta.9",
   "description": "Read the \"require\" of you javascript files. to make a CSS Importer.",
   "main": "index.js",
   "bin": {
@@ -18,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "async": "^2.1.4",
+    "babel-core": "^6.21.0",
     "glob": "^7.1.1",
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
