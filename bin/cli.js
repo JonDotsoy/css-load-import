@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs')
 const asyncSeries = require('async/series')
 const postcss = require('postcss')
