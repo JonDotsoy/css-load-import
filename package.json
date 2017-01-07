@@ -1,8 +1,8 @@
 {
   "name": "cssload",
   "title": "CSSLoad",
-  "version": "1.0.0-beta.9",
-  "description": "Read the \"require\" of you javascript files. to make a CSS Importer.",
+  "version": "1.0.0-beta.10",
+  "description": "Inspect your Javascript file and make a stylesheet with importables.",
   "main": "index.js",
   "bin": {
     "cssload": "./bin/cli.js"

@@ -1,5 +1,5 @@
 # CSSLoad
-Read the "require" of you javascript files. to make a CSS Importer.
+Inspect your Javascript file and make a stylesheet with importables.
 
     $ cssload i app/components/*.js -r resources/styles
 
