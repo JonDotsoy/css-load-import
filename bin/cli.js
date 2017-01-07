@@ -1,17 +1,15 @@
 const fs = require('fs')
 const asyncSeries = require('async/series')
-const rearg = require('lodash/rearg')
 const postcss = require('postcss')
 const atImport = require('postcss-import')
 const path = require('path')
-const bind = require('lodash/bind')
 const concat = require('lodash/concat')
 const glob = require('glob')
 const cssImport = require('..')
 
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
-    out: "style.css",
+    out: 'style.css',
     relative: process.cwd()
   },
   alias: {
@@ -45,7 +43,7 @@ switch (args.shift()) {
           )
         ]
       })
-      .forEach(function ([path,f]) {
+      .forEach(function ([path, f]) {
         console.log(`\n/** FROM FILE: ${path} **/\n`)
         console.log(f.source)
       })
@@ -55,7 +53,7 @@ switch (args.shift()) {
   case 'b':
   case 'build':
   case 'make':
-    (function() {
+    (function () {
       const nolfiles = args
       const files = concat(...nolfiles.map(e => glob.sync(e)))
 
@@ -74,10 +72,10 @@ switch (args.shift()) {
           )
         ]
       })
-      .map(function ([path,f]) {
+      .map(function ([path, f]) {
         f.source = `\n/** FROM FILE: ${path} **/\n${f.source}`
 
-        return [path,f]
+        return [path, f]
       })
 
       asyncSeries(fOut.map(function ([path, f]) {
@@ -92,7 +90,7 @@ switch (args.shift()) {
       }), function (err, results) {
         if (err) throw err
 
-        const outfile = [`/** CSSLoadImport: from ${files.length} files **/`,...results].join('\n')
+        const outfile = [`/** CSSLoadImport: from ${files.length} files **/`, ...results].join('\n')
 
         const fileToMake = path.resolve(argv.out)
 
@@ -100,7 +98,6 @@ switch (args.shift()) {
 
         console.log(`making file: ${fileToMake}`)
       })
-
     })()
     break
 }

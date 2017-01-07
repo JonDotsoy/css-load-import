@@ -62,15 +62,15 @@ function makeAImportableFile (importers) {
   return {linesSource, source}
 }
 
-function * resolveImporter (importer, {from, fromFile:fromFileArg, cwd:cwdArg, baseDir:baseDirArg} = {}) {
+function * resolveImporter (importer, {from, fromFile: fromFileArg, cwd: cwdArg, baseDir: baseDirArg} = {}) {
   const cwd = cwdArg || process.cwd()
 
   const arrImporter = [...importer]
 
-  yield * arrImporter.filter(e=>e.type==='stylesheet').map(function (imprt) {
+  yield * arrImporter.filter(e => e.type === 'stylesheet').map(function (imprt) {
     const {type, value} = imprt
 
-    const preBaseDir = path.resolve(from + "/" + value)
+    const preBaseDir = path.resolve(from + '/' + value)
 
     const baseDir = path.relative(cwd, preBaseDir)
 
@@ -79,7 +79,7 @@ function * resolveImporter (importer, {from, fromFile:fromFileArg, cwd:cwdArg, b
     return {type, value, baseDir, from, css}
   })
 
-  yield * arrImporter.filter(e=>e.type==='styles').map(function (imprt) {
+  yield * arrImporter.filter(e => e.type === 'styles').map(function (imprt) {
     const {type, value} = imprt
 
     const css = value
@@ -93,14 +93,9 @@ function * getCommentsFromString (stringArg) {
 
   if (currentInspect !== null) {
     yield currentInspect
-    newChunk = currentInspect.input.slice(currentInspect.index + currentInspect[0].length)
+    const newChunk = currentInspect.input.slice(currentInspect.index + currentInspect[0].length)
     yield * getCommentsFromString(newChunk)
   }
-
-}
-
-function descompose (stringArg) {
-
 }
 
 exports = module.exports

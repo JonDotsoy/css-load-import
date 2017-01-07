@@ -1,6 +1,6 @@
 {
   "name": "css-load-import",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "Read the \"require\" of you javascript files. to make a CSS Importer.",
   "main": "index.js",
   "bin": {
