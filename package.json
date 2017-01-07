@@ -1,6 +1,6 @@
 {
-  "name": "css-load-import",
-  "version": "1.0.0-beta.7",
+  "name": "cssload",
+  "version": "1.0.0-beta.8",
   "description": "Read the \"require\" of you javascript files. to make a CSS Importer.",
   "main": "index.js",
   "bin": {
@@ -20,7 +20,9 @@
     "async": "^2.1.4",
     "glob": "^7.1.1",
     "lodash": "^4.17.4",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "postcss": "^5.2.8",
+    "postcss-import": "^9.0.0"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
